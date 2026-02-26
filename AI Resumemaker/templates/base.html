@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Resume Analyzer{% endblock %}</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo-icon">◇</span>
+                AI Resume Analyzer
+            </a>
+            <button type="button" class="nav-toggle" aria-label="Toggle menu" id="navToggle"></button>
+            <nav class="site-nav" id="siteNav">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'index' %}#upload">Upload</a>
+                <a href="{% url 'analysis_list' %}">Past analyses</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main-content">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="message message-{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="footer-brand">AI Resume Analyzer</span>
+            <span class="footer-tagline">Powered by Django &amp; OpenAI</span>
+        </div>
+    </footer>
+
+    <div class="loader-overlay" id="loaderOverlay" aria-hidden="true">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Analyzing your resume…</p>
+            <p class="loader-subtext">This may take a few seconds</p>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var nav = document.getElementById('siteNav');
+            if (toggle && nav) {
+                toggle.addEventListener('click', function() {
+                    nav.classList.toggle('is-open');
+                    toggle.classList.toggle('is-open');
+                });
+            }
+        })();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

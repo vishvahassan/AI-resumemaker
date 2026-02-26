@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}AI Resume Analyzer — Get instant feedback on your resume{% endblock %}
+{% block body_class %}page-landing{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+        <h1 class="hero-title">Stand out with a stronger resume</h1>
+        <p class="hero-subtitle">Upload your resume and get AI-powered insights: skills we found, skills to add, job roles that fit, and actionable improvement tips.</p>
+        <a href="#upload" class="btn btn-primary btn-hero" id="heroUploadBtn">Upload resume</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="features-inner">
+        <h2 class="features-title">What you get</h2>
+        <ul class="features-list">
+            <li class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Detected skills from your resume</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-icon">+</span>
+                <span>Suggested skills to strengthen your profile</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-icon">→</span>
+                <span>Job roles that match your experience</span>
+            </li>
+            <li class="feature-item">
+                <span class="feature-icon">◆</span>
+                <span>Resume improvement tips</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section class="upload-section" id="upload">
+    <div class="upload-inner">
+        <h2 class="upload-heading">Upload your resume</h2>
+        <p class="upload-description">PDF or TXT, up to a few MB. We extract the text and analyze it with AI.</p>
+        <div class="upload-card">
+            <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="resume_file" class="file-label">
+                        <span class="file-label-text">Choose file</span>
+                        <span class="file-label-hint">PDF or .txt</span>
+                    </label>
+                    <input type="file" name="resume_file" id="resume_file" accept=".pdf,.txt" required class="file-input">
+                </div>
+                <button type="submit" class="btn btn-primary btn-upload" id="submitBtn">Upload and analyze</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    var form = document.getElementById('uploadForm');
+    var loader = document.getElementById('loaderOverlay');
+    var submitBtn = document.getElementById('submitBtn');
+
+    if (form && loader && submitBtn) {
+        form.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Uploading…';
+            loader.classList.add('is-visible');
+            loader.setAttribute('aria-hidden', 'false');
+        });
+    }
+
+    var heroBtn = document.getElementById('heroUploadBtn');
+    if (heroBtn) {
+        heroBtn.addEventListener('click', function(e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,172 @@
+/* Dashboard — clean, simple modern styling (uses theme from style.css) */
+
+.dashboard {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+}
+
+.dashboard-header {
+    margin-bottom: 2.5rem;
+}
+
+.dashboard-header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dashboard-title {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+.dashboard-subtitle {
+    margin: 0.35rem 0 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.btn-outline:hover {
+    background: var(--surface);
+    border-color: var(--accent);
+}
+
+/* Section grid */
+.dashboard-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.dashboard-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+    margin: 0 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+}
+
+/* Extracted Skills & Missing Skills — tags */
+.skill-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.15);
+    border-radius: 6px;
+}
+
+.skill-tag--suggestion {
+    color: var(--suggestion);
+    background: rgba(210, 153, 34, 0.15);
+}
+
+.section-empty {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Suggested Job Roles */
+.role-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.role-item {
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+}
+
+.role-item:last-child {
+    border-bottom: none;
+}
+
+/* Resume Tips */
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tip-item {
+    position: relative;
+    padding: 0.6rem 0 0.6rem 1.35rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+}
+
+.tip-item:last-child {
+    border-bottom: none;
+}
+
+.tip-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.9rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* Tips section full width on larger screens */
+@media (min-width: 720px) {
+    .dashboard-section--tips {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .dashboard {
+        padding: 0 1rem 2.5rem;
+    }
+    .dashboard-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

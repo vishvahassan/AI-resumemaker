@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Past analyses — AI Resume Analyzer{% endblock %}
+
+{% block content %}
+<div class="container page-list">
+    <h1>Past analyses</h1>
+    <a href="{% url 'index' %}#upload" class="btn btn-primary">Upload new resume</a>
+
+    <ul class="analysis-list">
+        {% for a in analyses %}
+            <li>
+                <a href="{% url 'dashboard' analysis_id=a.id %}">{{ a.original_filename|default:"Untitled" }}</a>
+                <span class="date">{{ a.created_at|date:"M d, Y H:i" }}</span>
+            </li>
+        {% empty %}
+            <li class="empty">No analyses yet. <a href="{% url 'index' %}">Upload a resume</a> to start.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

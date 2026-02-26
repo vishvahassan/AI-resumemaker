@@ -1,0 +1,15 @@
+# Install using: pip install -r requirements.txt
+
+Django>=5.0,<6
+openai>=1.0
+pdfplumber
+PyPDF2
+pypdf
+
+# OCR support for scanned/image-based PDFs
+pytesseract
+pdf2image
+Pillow
+
+# Optional: load .env for OPENAI_API_KEY in local development
+# python-dotenv

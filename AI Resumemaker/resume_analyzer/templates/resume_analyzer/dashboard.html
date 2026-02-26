@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Analysis — {{ analysis.original_filename }}{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <header class="dashboard-header">
+        <div class="dashboard-header-inner">
+            <div>
+                <h1 class="dashboard-title">Resume Analysis</h1>
+                <p class="dashboard-subtitle">{{ analysis.original_filename }}</p>
+            </div>
+            <a href="{% url 'index' %}" class="btn btn-outline">Analyze another</a>
+        </div>
+    </header>
+
+    <div class="dashboard-sections">
+        <section class="dashboard-section dashboard-section--skills">
+            <h2 class="section-title">Extracted Skills</h2>
+            <ul class="skill-tags">
+                {% for skill in skills %}
+                    <li class="skill-tag">{{ skill }}</li>
+                {% empty %}
+                    <li class="section-empty">No skills extracted.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="dashboard-section dashboard-section--missing">
+            <h2 class="section-title">Missing Skills</h2>
+            <ul class="skill-tags skill-tags--suggestion">
+                {% for skill in missing_skills %}
+                    <li class="skill-tag skill-tag--suggestion">{{ skill }}</li>
+                {% empty %}
+                    <li class="section-empty">No suggestions.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="dashboard-section dashboard-section--roles">
+            <h2 class="section-title">Suggested Job Roles</h2>
+            <ul class="role-list">
+                {% for role in suggested_roles %}
+                    <li class="role-item">{{ role }}</li>
+                {% empty %}
+                    <li class="section-empty">No roles suggested.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="dashboard-section dashboard-section--tips">
+            <h2 class="section-title">Resume Tips</h2>
+            <ul class="tips-list">
+                {% for tip in improvement_tips %}
+                    <li class="tip-item">{{ tip }}</li>
+                {% empty %}
+                    <li class="section-empty">No tips available.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</div>
+{% endblock %}
